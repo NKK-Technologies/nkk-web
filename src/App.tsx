@@ -31,7 +31,7 @@ function App() {
           NKK <span className="text-brand-light font-light">tech</span>
         </h1>
 
-        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed font-light">
+        <p className="text-lg sm:text-xl text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed">
           We are crafting something extraordinary. A new standard of digital experience is on the horizon. Prepare for a revolution in technology.
         </p>
 
