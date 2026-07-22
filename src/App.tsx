@@ -3,6 +3,8 @@ import { Hero } from './components/Hero'
 import { Services } from './components/Services'
 import { WhyUs } from './components/WhyUs'
 import { Process } from './components/Process'
+import { QuoteSection } from './components/QuoteSection'
+import { Footer } from './components/Footer'
 
 function App() {
   return (
@@ -12,7 +14,8 @@ function App() {
       <Services />
       <WhyUs />
       <Process />
-      {/* QuoteSection and Footer land in Task 4. */}
+      <QuoteSection />
+      <Footer />
     </>
   )
 }
