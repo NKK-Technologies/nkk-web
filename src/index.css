@@ -1,39 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --color-brand-blue: #0088CC;
-  --color-brand-light: #E6F3FA;
-  --color-brand-dark: #0A192F;
-  --color-brand-glass: rgba(230, 243, 250, 0.05);
-  --color-brand-glass-border: rgba(230, 243, 250, 0.1);
-
-  --font-sans: "Avenir Next", "Space Grotesk", system-ui, sans-serif;
-
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-float: float 6s ease-in-out infinite;
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-Heavy.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
+@theme {
+  --color-brand: #0088CC;
+  --color-brand-deep: #0077B3;
+  --color-ice: #E6F3FA;
+  --color-navy: #0A192F;
+  --color-sky-mist: #7CC1E8;
+  --color-ink: #22344D;
+  --color-muted: #5C7089;
+  --color-line: #D8E7F2;
+  --color-line-strong: #AFCFE4;
+  --color-dark-body: #B8C7DA;
+
+  --font-display: "Avenir Next", -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Space Grotesk", "Avenir Next", sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(10, 25, 47, .06), 0 4px 12px rgba(10, 25, 47, .08);
+
+  --animate-hero-float: heroPieceFloat 5s ease-in-out infinite;
+
+  @keyframes heroPieceFloat {
+    0%, 100% {
+      transform: rotate(7deg) translate(0, 0);
+    }
+    50% {
+      transform: rotate(5deg) translate(-6px, 8px);
+    }
   }
 }
 
 @layer base {
-  body {
-    @apply bg-brand-dark text-white font-sans antialiased selection:bg-brand-blue selection:text-white;
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 72px;
   }
-}
 
-@layer components {
-  .glass-panel {
-    @apply bg-brand-glass backdrop-blur-xl border border-brand-glass-border rounded-2xl shadow-2xl;
-  }
-  
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-light;
+  body {
+    background-color: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
