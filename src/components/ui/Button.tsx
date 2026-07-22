@@ -24,7 +24,7 @@ type ButtonAsAnchor = CommonProps &
 type ButtonProps = ButtonAsButton | ButtonAsAnchor
 
 const base =
-  'inline-flex items-center justify-center gap-2 rounded-xl border-[1.5px] border-transparent font-body font-semibold whitespace-nowrap no-underline cursor-pointer transition active:scale-[.98] focus-visible:outline-none focus-visible:shadow-[0_0_0_3px_rgba(0,136,204,.35)]'
+  'inline-flex items-center justify-center gap-2 rounded-xl border-[1.5px] font-body font-semibold whitespace-nowrap no-underline cursor-pointer transition active:scale-[.98] focus-visible:outline-none focus-visible:shadow-[0_0_0_3px_rgba(0,136,204,.35)]'
 
 const sizes: Record<Size, string> = {
   md: 'h-10 px-5 text-[15px]',
@@ -32,7 +32,7 @@ const sizes: Record<Size, string> = {
 }
 
 const variants: Record<Variant, string> = {
-  primary: 'bg-brand text-white hover:bg-brand-deep',
+  primary: 'bg-brand text-white border-transparent hover:bg-brand-deep',
   outline: 'bg-transparent text-brand border-brand hover:bg-ice',
 }
 

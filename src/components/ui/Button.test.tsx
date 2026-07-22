@@ -31,6 +31,20 @@ describe('Button', () => {
     expect(el).not.toHaveClass('bg-brand')
   })
 
+  it('gives the outline variant a brand border and never a transparent one', () => {
+    render(<Button variant="outline">Outline</Button>)
+    const el = screen.getByRole('button', { name: 'Outline' })
+    expect(el).toHaveClass('border-brand')
+    expect(el).not.toHaveClass('border-transparent')
+  })
+
+  it('gives the primary variant a transparent border', () => {
+    render(<Button>Primary</Button>)
+    const el = screen.getByRole('button', { name: 'Primary' })
+    expect(el).toHaveClass('border-transparent')
+    expect(el).not.toHaveClass('border-brand')
+  })
+
   it('adds w-full when fullWidth is set', () => {
     render(<Button fullWidth>Wide</Button>)
     const el = screen.getByRole('button', { name: 'Wide' })
