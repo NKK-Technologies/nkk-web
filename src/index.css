@@ -50,17 +50,6 @@
   --ease-standard: cubic-bezier(.2, .6, .2, 1);
   --ease-out-soft: cubic-bezier(.22, .61, .36, 1);
   --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
-
-  --animate-hero-float: heroPieceFloat 5s ease-in-out infinite;
-
-  @keyframes heroPieceFloat {
-    0%, 100% {
-      transform: rotate(7deg) translate(0, 0);
-    }
-    50% {
-      transform: rotate(5deg) translate(-6px, 8px);
-    }
-  }
 }
 
 @layer base {
@@ -142,8 +131,8 @@
 
   .anim-hero-piece {
     animation:
-      pieceDrop 900ms var(--ease-out-soft) 700ms backwards,
-      heroPieceFloat 5s ease-in-out 1.6s infinite;
+      pieceDrop 900ms var(--ease-out-soft) 850ms backwards,
+      heroPieceFloat 5s ease-in-out 1.75s infinite;
   }
 }
 
@@ -219,6 +208,15 @@
   }
   75% {
     transform: translateX(3px);
+  }
+}
+
+@keyframes heroPieceFloat {
+  0%, 100% {
+    transform: rotate(7deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(5deg) translate(-6px, 8px);
   }
 }
 

@@ -37,7 +37,7 @@ export function WhyUs() {
         <div className="grid gap-3 md:grid-cols-3 md:gap-5">
           {reasons.map(({ title, body }, i) => (
             <Reveal key={title} delay={i * 80}>
-              <article className="h-full bg-[rgba(230,243,250,.06)] border border-[rgba(230,243,250,.14)] rounded-2xl p-5 md:p-6 transition-[transform,box-shadow,background-color,border-color] duration-200 ease-[var(--ease-standard)] hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(10,25,47,.1),0_12px_32px_rgba(10,25,47,.14)] hover:bg-[rgba(230,243,250,.1)] hover:border-[rgba(230,243,250,.22)]">
+              <article className="h-full bg-[rgba(230,243,250,.06)] border border-[rgba(230,243,250,.14)] rounded-2xl p-5 md:p-6 transition-[translate,box-shadow,background-color,border-color] duration-200 ease-[var(--ease-standard)] hover:-translate-y-1 hover:shadow-[0_4px_8px_rgba(10,25,47,.1),0_12px_32px_rgba(10,25,47,.14)] hover:bg-[rgba(230,243,250,.1)] hover:border-[rgba(230,243,250,.22)]">
                 <h3 className="font-display font-bold text-white leading-[1.2] text-base md:text-[17px]">
                   {title}
                 </h3>

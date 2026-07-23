@@ -13,6 +13,8 @@ describe('Nav mobile menu', () => {
     // Panel stays mounted but is hidden from AT when closed
     const panel = container.querySelector('#mobile-menu')
     expect(panel).toHaveAttribute('aria-hidden', 'true')
+    // Closed panel is out of the AT tree — only the desktop "Services" link shows
+    expect(screen.getAllByRole('link', { name: 'Services' })).toHaveLength(1)
     // Hamburger (MenuIcon) shows three lines when closed
     expect(toggle.querySelectorAll('line')).toHaveLength(3)
   })

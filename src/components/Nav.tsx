@@ -41,7 +41,7 @@ export function Nav() {
             <a
               key={link.href}
               href={link.href}
-              className="relative text-ink no-underline hover:text-brand after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-brand after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200"
+              className="relative text-ink no-underline hover:text-brand after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-full after:bg-brand after:origin-left after:scale-x-0 hover:after:scale-x-100 after:transition-transform after:duration-200 after:ease-standard"
             >
               {link.label}
             </a>
@@ -69,7 +69,7 @@ export function Nav() {
         id="mobile-menu"
         aria-hidden={!menuOpen}
         inert={!menuOpen}
-        className={`md:hidden grid transition-all duration-[250ms] ease-standard ${
+        className={`md:hidden grid transition-[grid-template-rows,opacity] duration-[250ms] ease-standard ${
           menuOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'
         }`}
       >
