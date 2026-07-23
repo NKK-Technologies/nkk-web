@@ -1,4 +1,5 @@
 import logoDarkBg from '../assets/logo_dark_bg.png'
+import { CONTACT } from '@/lib/site'
 import { Reveal } from './ui/Reveal'
 
 const headingClasses =
@@ -62,14 +63,14 @@ export function Footer() {
 
           <div className="hidden md:flex flex-col gap-2.5">
             <span className={headingClasses}>Contact</span>
-            <a href="tel:+255700000000" className={linkClasses}>
-              +255 700 000 000
+            <a href={CONTACT.phoneHref} className={linkClasses}>
+              {CONTACT.phoneDisplay}
             </a>
-            <a href="mailto:info@nkktech.co.tz" className={linkClasses}>
-              info@nkktech.co.tz
+            <a href={`mailto:${CONTACT.email}`} className={linkClasses}>
+              {CONTACT.email}
             </a>
             <span className="text-sm text-dark-body min-h-8 flex items-center">
-              Dar es Salaam, Tanzania
+              {CONTACT.location}
             </span>
           </div>
         </Reveal>
@@ -77,7 +78,7 @@ export function Footer() {
         <div className="mt-7 pt-4 md:pt-5 border-t border-[rgba(230,243,250,.14)] flex flex-col gap-1.5 md:flex-row md:items-center md:justify-between md:gap-6">
           <span className="order-2 text-[11px] md:order-none md:text-[13px] text-dark-body">
             <span className="md:hidden">
-              © 2026 NKK Tech Company Limited · Dar es Salaam, Tanzania
+              © 2026 NKK Tech Company Limited · Mikocheni, Dar es Salaam
             </span>
             <span className="hidden md:inline">
               © 2026 NKK Tech Company Limited

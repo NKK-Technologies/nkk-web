@@ -2,6 +2,7 @@
 
 import { useId, useState } from 'react'
 import type { ReactNode } from 'react'
+import { CONTACT } from '@/lib/site'
 import { SectionHeader } from './ui/SectionHeader'
 import { Reveal } from './ui/Reveal'
 import { Button } from './ui/Button'
@@ -72,15 +73,15 @@ export function QuoteSection() {
           <div className="hidden md:flex flex-col gap-3 mt-2 text-[15px] text-ink">
             <div className="flex items-center gap-2.5">
               <PhoneIcon size={18} />
-              <span>+255 700 000 000</span>
+              <span>{CONTACT.phoneDisplay}</span>
             </div>
             <div className="flex items-center gap-2.5">
               <MailIcon size={18} />
-              <span>info@nkktech.co.tz</span>
+              <span>{CONTACT.email}</span>
             </div>
             <div className="flex items-center gap-2.5">
               <MapPinIcon size={18} />
-              <span>Dar es Salaam, Tanzania</span>
+              <span>{CONTACT.location}</span>
             </div>
           </div>
         </Reveal>
@@ -182,22 +183,22 @@ export function QuoteSection() {
 
         <div className="flex flex-col gap-2.5 text-[15px] md:hidden">
           <a
-            href="tel:+255700000000"
+            href={CONTACT.phoneHref}
             className="flex items-center gap-2.5 min-h-11 text-ink no-underline"
           >
             <PhoneIcon size={18} />
-            <span>+255 700 000 000</span>
+            <span>{CONTACT.phoneDisplay}</span>
           </a>
           <a
-            href="mailto:info@nkktech.co.tz"
+            href={`mailto:${CONTACT.email}`}
             className="flex items-center gap-2.5 min-h-11 text-ink no-underline"
           >
             <MailIcon size={18} />
-            <span>info@nkktech.co.tz</span>
+            <span>{CONTACT.email}</span>
           </a>
           <span className="flex items-center gap-2.5 min-h-11 text-ink">
             <MapPinIcon size={18} />
-            <span>Dar es Salaam, Tanzania</span>
+            <span>{CONTACT.location}</span>
           </span>
         </div>
       </div>
