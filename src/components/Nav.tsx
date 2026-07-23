@@ -1,3 +1,5 @@
+'use client'
+
 import { useEffect, useState } from 'react'
 import { Button } from './ui/Button'
 import { MenuIcon, CloseIcon } from './ui/icons'
@@ -32,7 +34,7 @@ export function Nav() {
     >
       <div className="max-w-[1140px] mx-auto flex items-center justify-between gap-3 md:gap-6 py-2.5 px-4 md:py-3.5 md:px-6">
         <a href="#top" className="flex items-center">
-          <img src={logoMain} alt="NKK Tech" className="block h-8 md:h-[38px]" />
+          <img src={logoMain.src} alt="NKK Tech" className="block h-8 md:h-[38px]" />
         </a>
 
         {/* Desktop navigation */}

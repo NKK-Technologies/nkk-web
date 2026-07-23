@@ -31,7 +31,7 @@ export function Footer() {
         <Reveal className="flex flex-col gap-7 md:grid md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-10 md:items-start">
           <div className="flex flex-col gap-3 md:gap-3.5">
             <img
-              src={logoDarkBg}
+              src={logoDarkBg.src}
               alt="NKK Tech"
               className="h-[30px] md:h-[34px] self-start"
             />
