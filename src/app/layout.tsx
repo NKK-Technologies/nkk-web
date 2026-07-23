@@ -2,7 +2,10 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import localFont from 'next/font/local'
 import { Space_Grotesk } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/next'
+import { SpeedInsights } from '@vercel/speed-insights/next'
 import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION } from '@/lib/site'
+import { WhatsAppButton } from '@/components/WhatsAppButton'
 import './globals.css'
 
 const avenirNext = localFont({
@@ -66,6 +69,9 @@ export default function RootLayout({ children }: { children: ReactNode }) {
           }}
         />
         {children}
+        <WhatsAppButton />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   )
