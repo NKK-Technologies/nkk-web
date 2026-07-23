@@ -46,20 +46,20 @@
 
 @layer components {
   .reveal {
-    opacity: 0;
-    transform: translateY(20px);
     transition:
       opacity 650ms var(--ease-out-soft),
       transform 650ms var(--ease-out-soft);
   }
 
-  .reveal.is-visible {
-    opacity: 1;
-    transform: none;
+  /* Hidden state exists only when JS is running (html.js is set by an inline
+     script before paint). Static HTML, crawlers and no-JS users always see
+     content. */
+  html.js .reveal:not(.is-visible) {
+    opacity: 0;
+    transform: translateY(20px);
   }
 
-  /* Step-badge pop (Task 3): hidden until the card's reveal fires, then pops. */
-  .reveal:not(.is-visible) .badge-pop {
+  html.js .reveal:not(.is-visible) .badge-pop {
     opacity: 0;
   }
 
@@ -193,7 +193,8 @@
 /* Reduced-motion guard: reveals snap to their final state and every keyframe
    animation (entrances + loops) is killed via the shared motion-safe-anim hook. */
 @media (prefers-reduced-motion: reduce) {
-  .reveal {
+  .reveal,
+  html.js .reveal:not(.is-visible) {
     opacity: 1;
     transform: none;
     transition: none;

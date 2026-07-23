@@ -11,15 +11,21 @@ import type { ElementType, HTMLAttributes, JSX, ReactNode } from 'react'
  */
 function useReveal() {
   const ref = useRef<HTMLElement | null>(null)
-  // When IntersectionObserver is unavailable, start visible so content is never
-  // hidden. Deriving the initial value here (rather than a setState in the
-  // effect) keeps the effect free of synchronous cascading renders.
-  const [visible, setVisible] = useState(
-    () => typeof IntersectionObserver === 'undefined',
-  )
+  // Always start hidden-state-off so server and client first render agree.
+  // The no-IntersectionObserver fallback lives in the effect (client-only),
+  // so SSR markup never carries is-visible.
+  const [visible, setVisible] = useState(false)
 
   useEffect(() => {
-    if (typeof IntersectionObserver === 'undefined') return
+    if (typeof IntersectionObserver === 'undefined') {
+      // Deliberate one-time, client-only fallback: SSR/first paint always
+      // renders hidden-state-off, and this effect flips it once IO is known
+      // to be unavailable. There is no external subscription to hang this
+      // off of, so a direct setState here is intentional, not a smell.
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setVisible(true)
+      return
+    }
     const el = ref.current
     if (!el) return
 

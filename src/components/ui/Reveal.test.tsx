@@ -1,5 +1,6 @@
 import { describe, it, expect, beforeEach, afterEach } from 'vitest'
 import { render, screen, act, cleanup } from '@testing-library/react'
+import { renderToString } from 'react-dom/server'
 import { Reveal } from './Reveal'
 
 beforeEach(() => {
@@ -103,6 +104,22 @@ describe('Reveal', () => {
     try {
       render(<Reveal>no observer</Reveal>)
       expect(screen.getByText('no observer')).toHaveClass('is-visible')
+    } finally {
+      globalThis.IntersectionObserver = original
+    }
+  })
+})
+
+describe('Reveal SSR', () => {
+  it('server markup is plain reveal — visible content, no is-visible, no hidden state', () => {
+    const original = globalThis.IntersectionObserver
+    // @ts-expect-error simulating a server environment without IntersectionObserver
+    delete globalThis.IntersectionObserver
+    try {
+      const html = renderToString(<Reveal>ssr content</Reveal>)
+      expect(html).toContain('ssr content')
+      expect(html).toContain('class="reveal"')
+      expect(html).not.toContain('is-visible')
     } finally {
       globalThis.IntersectionObserver = original
     }
