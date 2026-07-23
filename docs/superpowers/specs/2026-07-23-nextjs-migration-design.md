@@ -62,8 +62,9 @@ The App Router directory lives at `src/app/` (consistent with existing
   in the static HTML. Initial hidden state is applied only once JS runs
   (e.g. class added by the Reveal client component on mount, not present in
   server-rendered markup). Crawlers and no-JS users see full content.
-- Static assets move to Next conventions: logos/icons imported via
-  `next/image` where straightforward; decorative hero PNG keeps `alt=""`.
+- Static assets keep plain `<img>` tags using Next static-import `.src`
+  (logos are ≤28KB PNGs — `next/image` buys nothing and complicates jsdom
+  tests); decorative hero PNG keeps `alt=""`.
 
 ### Quote form
 
