@@ -1,4 +1,5 @@
 import logoDarkBg from '../assets/logo_dark_bg.png'
+import { Reveal } from './ui/Reveal'
 
 const headingClasses =
   'font-display font-bold italic uppercase text-[13px] tracking-[.08em] text-sky-mist'
@@ -27,7 +28,7 @@ export function Footer() {
   return (
     <footer className="bg-navy">
       <div className="max-w-[1140px] mx-auto px-5 md:px-6 pt-10 md:pt-14 pb-7 md:pb-10">
-        <div className="flex flex-col gap-7 md:grid md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-10 md:items-start">
+        <Reveal className="flex flex-col gap-7 md:grid md:grid-cols-[1.4fr_1fr_1fr_1fr] md:gap-10 md:items-start">
           <div className="flex flex-col gap-3 md:gap-3.5">
             <img
               src={logoDarkBg}
@@ -71,7 +72,7 @@ export function Footer() {
               Dar es Salaam, Tanzania
             </span>
           </div>
-        </div>
+        </Reveal>
 
         <div className="mt-7 pt-4 md:pt-5 border-t border-[rgba(230,243,250,.14)] flex flex-col gap-1.5 md:flex-row md:items-center md:justify-between md:gap-6">
           <span className="order-2 text-[11px] md:order-none md:text-[13px] text-dark-body">

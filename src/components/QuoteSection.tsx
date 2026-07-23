@@ -1,6 +1,7 @@
 import { useId, useState } from 'react'
 import type { ReactNode } from 'react'
 import { SectionHeader } from './ui/SectionHeader'
+import { Reveal } from './ui/Reveal'
 import { Button } from './ui/Button'
 import { CheckIcon, MailIcon, MapPinIcon, PhoneIcon } from './ui/icons'
 
@@ -34,6 +35,7 @@ function isValidEmail(email: string): boolean {
 export function QuoteSection() {
   const [sent, setSent] = useState(false)
   const [error, setError] = useState(false)
+  const [errorCount, setErrorCount] = useState(0)
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -48,6 +50,7 @@ export function QuoteSection() {
 
     if (!name || !message || !hasContact || !emailOk) {
       setError(true)
+      setErrorCount((count) => count + 1)
       return
     }
 
@@ -58,7 +61,7 @@ export function QuoteSection() {
   return (
     <section id="quote" className="bg-white">
       <div className="max-w-[1140px] mx-auto px-5 md:px-6 py-14 md:py-[88px] flex flex-col gap-6 md:grid md:grid-cols-[1fr_1.1fr] md:gap-14 md:items-start">
-        <div>
+        <Reveal>
           <SectionHeader
             kicker="Get in touch"
             title="Tell us about your project"
@@ -78,12 +81,12 @@ export function QuoteSection() {
               <span>Dar es Salaam, Tanzania</span>
             </div>
           </div>
-        </div>
+        </Reveal>
 
-        <div className="bg-ice rounded-2xl p-5 md:p-8">
+        <Reveal delay={120} className="bg-ice rounded-2xl p-5 md:p-8">
           {sent ? (
             <div role="status" className="flex flex-col items-start gap-2.5 py-4 px-1 md:py-6 md:px-2">
-              <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand">
+              <span className="anim-pop motion-safe-anim flex h-11 w-11 items-center justify-center rounded-full bg-brand">
                 <CheckIcon size={22} />
               </span>
               <h3 className="font-display font-bold text-navy leading-[1.2] text-lg md:text-xl">
@@ -160,14 +163,20 @@ export function QuoteSection() {
                 )}
               </Field>
               {error && (
-                <p role="alert" className="text-[13px] text-[#D64545]">{ERROR_MESSAGE}</p>
+                <p
+                  key={errorCount}
+                  role="alert"
+                  className="anim-shake motion-safe-anim text-[13px] text-[#D64545]"
+                >
+                  {ERROR_MESSAGE}
+                </p>
               )}
               <Button type="submit" variant="primary" size="lg" fullWidth>
                 Send request
               </Button>
             </form>
           )}
-        </div>
+        </Reveal>
 
         <div className="flex flex-col gap-2.5 text-[15px] md:hidden">
           <a

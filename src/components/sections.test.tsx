@@ -60,3 +60,15 @@ describe('Process section', () => {
     }
   })
 })
+
+describe('Scroll reveals keep content in the DOM', () => {
+  it('keeps a later card queryable before any IntersectionObserver fires', () => {
+    // Wrapping cards in <Reveal> must hide them with opacity/transform only —
+    // the element stays in the DOM and accessibility tree. Nothing fires the
+    // mocked observer here, so the last (highest-delay) card is still reachable.
+    render(<Services />)
+    expect(
+      screen.getByRole('heading', { name: 'Hardware supply & tendering' }),
+    ).toBeInTheDocument()
+  })
+})

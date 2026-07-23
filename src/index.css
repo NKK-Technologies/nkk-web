@@ -99,12 +99,33 @@
     transform: none;
   }
 
+  /* Step-badge pop (Task 3): hidden until the card's reveal fires, then pops. */
+  .reveal:not(.is-visible) .badge-pop {
+    opacity: 0;
+  }
+
+  .reveal.is-visible .badge-pop {
+    animation: popIn 400ms var(--ease-spring) 200ms both;
+  }
+
   /* Hero load-sequence animations (Task 2). Per-node delays are applied
      alongside these with Tailwind arbitrary [animation-delay:*] utilities.
      transform-box/origin let pieceAssemble scale each SVG path about its own
      centre. Every consuming node also carries `motion-safe-anim`. */
   .anim-rise {
     animation: riseIn 500ms var(--ease-out-soft) both;
+  }
+
+  /* Success-check pop (Task 3). Plays on mount; carries motion-safe-anim. */
+  .anim-pop {
+    animation: popIn 400ms var(--ease-spring) both;
+  }
+
+  /* Form-error shake (Task 3): re-triggered by remount via key={errorCount};
+     carries motion-safe-anim. */
+  .anim-shake {
+    animation: shakeX 300ms var(--ease-standard) both;
+    animation-iteration-count: 2;
   }
 
   .piece-anim {
@@ -211,6 +232,11 @@
   }
 
   .motion-safe-anim {
+    animation: none !important;
+  }
+
+  .badge-pop {
+    opacity: 1 !important;
     animation: none !important;
   }
 }
