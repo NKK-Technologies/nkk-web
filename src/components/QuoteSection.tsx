@@ -82,7 +82,7 @@ export function QuoteSection() {
 
         <div className="bg-ice rounded-2xl p-5 md:p-8">
           {sent ? (
-            <div className="flex flex-col items-start gap-2.5 py-4 px-1 md:py-6 md:px-2">
+            <div role="status" className="flex flex-col items-start gap-2.5 py-4 px-1 md:py-6 md:px-2">
               <span className="flex h-11 w-11 items-center justify-center rounded-full bg-brand">
                 <CheckIcon size={22} />
               </span>
@@ -105,6 +105,7 @@ export function QuoteSection() {
                     <input
                       id={id}
                       name="name"
+                      autoComplete="name"
                       placeholder="Full name"
                       className={inputClasses}
                     />
@@ -115,6 +116,7 @@ export function QuoteSection() {
                     <input
                       id={id}
                       name="company"
+                      autoComplete="organization"
                       placeholder="Company name"
                       className={inputClasses}
                     />
@@ -128,6 +130,7 @@ export function QuoteSection() {
                       id={id}
                       name="email"
                       type="email"
+                      autoComplete="email"
                       placeholder="you@company.co.tz"
                       className={inputClasses}
                     />
@@ -138,6 +141,8 @@ export function QuoteSection() {
                     <input
                       id={id}
                       name="phone"
+                      type="tel"
+                      autoComplete="tel"
                       placeholder="+255 …"
                       className={inputClasses}
                     />
@@ -155,7 +160,7 @@ export function QuoteSection() {
                 )}
               </Field>
               {error && (
-                <p className="text-[13px] text-[#D64545]">{ERROR_MESSAGE}</p>
+                <p role="alert" className="text-[13px] text-[#D64545]">{ERROR_MESSAGE}</p>
               )}
               <Button type="submit" variant="primary" size="lg" fullWidth>
                 Send request

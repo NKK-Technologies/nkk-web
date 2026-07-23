@@ -39,7 +39,7 @@ export function Services() {
           kicker="What we do"
           title="Four services. One accountable partner."
           sub="Scope, supply, installation and support handled by the same team — no finger-pointing between vendors."
-          className="mb-8 md:mb-12"
+          className="mb-6 md:mb-10"
         />
         <div className="grid gap-3.5 md:gap-5 md:grid-cols-2 lg:grid-cols-4">
           {services.map(({ icon: Icon, title, body }) => (
@@ -50,7 +50,7 @@ export function Services() {
               <span className="shrink-0 flex items-center justify-center w-11 h-11 rounded-xl bg-ice">
                 <Icon />
               </span>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1.5 md:gap-3.5">
                 <h3 className="font-display font-bold text-navy leading-[1.2] text-lg md:text-xl">
                   {title}
                 </h3>

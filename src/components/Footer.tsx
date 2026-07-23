@@ -3,7 +3,7 @@ import logoDarkBg from '../assets/logo_dark_bg.png'
 const headingClasses =
   'font-display font-bold italic uppercase text-[13px] tracking-[.08em] text-sky-mist'
 const linkClasses =
-  'text-sm text-dark-body no-underline hover:text-white min-h-8 flex items-center'
+  'text-sm text-dark-body no-underline hover:text-white min-h-8 md:min-h-0 flex items-center'
 
 type Link = {
   label: string

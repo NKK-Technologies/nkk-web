@@ -29,7 +29,7 @@ export function WhyUs() {
           kicker="Why NKK Tech"
           title="A new company. A seasoned team."
           sub="NKK Tech is newly registered — our people are not. We bring years of hands-on delivery from Tanzania's technology, security and procurement sectors, without the overhead of a large firm."
-          className="mb-8 md:mb-12 max-w-[680px]"
+          className="mb-6 md:mb-11 max-w-[680px]"
         />
         <div className="grid gap-3 md:grid-cols-3 md:gap-5">
           {reasons.map(({ title, body }) => (

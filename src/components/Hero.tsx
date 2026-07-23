@@ -48,7 +48,7 @@ export function Hero() {
           <img
             src={iconClear}
             alt=""
-            className="absolute w-[120px] h-[120px] left-1/2 ml-3 bottom-[138px] md:w-[170px] md:h-[170px] md:left-[226px] md:ml-0 md:bottom-[220px] drop-shadow-[0_18px_28px_rgba(10,25,47,.22)] animate-hero-float motion-reduce:animate-none"
+            className="absolute w-[120px] h-[120px] left-1/2 ml-3 bottom-[138px] md:w-[170px] md:h-[170px] md:left-[226px] md:ml-0 md:bottom-[220px] drop-shadow-[0_14px_22px_rgba(10,25,47,.22)] md:drop-shadow-[0_18px_28px_rgba(10,25,47,.22)] animate-hero-float motion-reduce:animate-none"
           />
         </div>
       </div>

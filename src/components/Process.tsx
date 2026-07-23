@@ -31,7 +31,7 @@ export function Process() {
         <SectionHeader
           kicker="How we work"
           title="Three steps, no surprises."
-          className="mb-8 md:mb-12"
+          className="mb-6 md:mb-10"
         />
         <div className="grid gap-3 md:grid-cols-3 md:gap-5">
           {steps.map(({ number, title, body }) => (
@@ -42,7 +42,7 @@ export function Process() {
               <span className="shrink-0 flex items-center justify-center w-9 h-9 rounded-full bg-brand text-white font-display font-bold">
                 {number}
               </span>
-              <div className="flex flex-col gap-1.5">
+              <div className="flex flex-col gap-1 md:gap-3">
                 <h3 className="font-display font-bold text-navy leading-[1.2] text-lg md:text-xl">
                   {title}
                 </h3>
