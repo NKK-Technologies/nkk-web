@@ -1,34 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
-
-@font-face {
-  font-family: "Avenir Next";
-  src: url("/fonts/AvenirNext-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Avenir Next";
-  src: url("/fonts/AvenirNext-Bold.ttf") format("truetype");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Avenir Next";
-  src: url("/fonts/AvenirNext-BoldItalic.ttf") format("truetype");
-  font-weight: 700;
-  font-style: italic;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Avenir Next";
-  src: url("/fonts/AvenirNext-Heavy.ttf") format("truetype");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
 
 @theme {
   --color-brand: #0088CC;
@@ -42,8 +12,8 @@
   --color-line-strong: #AFCFE4;
   --color-dark-body: #B8C7DA;
 
-  --font-display: "Avenir Next", -apple-system, "Segoe UI", sans-serif;
-  --font-body: "Space Grotesk", "Avenir Next", sans-serif;
+  --font-display: var(--font-avenir-next), -apple-system, "Segoe UI", sans-serif;
+  --font-body: var(--font-space-grotesk), var(--font-avenir-next), sans-serif;
 
   --shadow-card: 0 1px 2px rgba(10, 25, 47, .06), 0 4px 12px rgba(10, 25, 47, .08);
 
