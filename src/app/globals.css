@@ -87,22 +87,20 @@
     animation-iteration-count: 2;
   }
 
-  .piece-anim {
-    transform-box: fill-box;
-    transform-origin: center;
-    animation: pieceAssemble 500ms var(--ease-out-soft) both;
+  /* Hero jigsaw (Task 2): the brand-mark piece flies in and docks into the
+     empty slot on load — fast→slow via cubic-bezier(.16,1,.3,1) — while its
+     shadow flattens. The --dock-* offsets (set per-breakpoint on the node with
+     Tailwind arbitrary properties) are the fly-in origin. Carries
+     motion-safe-anim, so reduced motion leaves the mark at its docked rest. */
+  .hero-dock {
+    animation: heroDockIn 3s cubic-bezier(.16, 1, .3, 1) both;
   }
 
-  .anim-socket {
-    animation:
-      socketIn 500ms var(--ease-out-soft) 600ms both,
-      march 2.5s linear 1.1s infinite;
-  }
-
-  .anim-hero-piece {
-    animation:
-      pieceDrop 900ms var(--ease-out-soft) 850ms backwards,
-      heroPieceFloat 5s ease-in-out 1.75s infinite;
+  /* The two slot-facing seams flash brand blue as the mark attaches (~2.9s),
+     then repeat forever as a heartbeat pulse. Base opacity 0 lives on the SVG
+     node, so reduced motion (animation killed) simply hides the flash. */
+  .hero-seam-flash {
+    animation: heroSeamFlash 2.8s linear 2.9s infinite;
   }
 }
 
@@ -120,40 +118,30 @@
   }
 }
 
-@keyframes pieceAssemble {
-  from {
-    opacity: 0;
-    transform: scale(.92);
+/* Mark docks into the slot: fly-in origin comes from the per-breakpoint
+   --dock-x/--dock-y custom properties; shadow flattens as it lands. */
+@keyframes heroDockIn {
+  0% {
+    transform: translate(var(--dock-x), var(--dock-y)) rotate(12deg);
+    filter: drop-shadow(0 26px 40px rgba(10, 25, 47, .3));
   }
-  to {
-    opacity: 1;
-    transform: none;
-  }
-}
-
-@keyframes socketIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
+  100% {
+    transform: translate(0, 0) rotate(0deg);
+    filter: drop-shadow(0 3px 8px rgba(10, 25, 47, .14));
   }
 }
 
-@keyframes pieceDrop {
-  from {
+/* Seam heartbeat: opacity 0→1→0, brightest early then a slow fade out
+   (keyTimes 0/.22/1 in the source handoff). */
+@keyframes heroSeamFlash {
+  0% {
     opacity: 0;
-    transform: rotate(12deg) translate(34px, -46px);
   }
-  to {
+  22% {
     opacity: 1;
-    transform: rotate(7deg) translate(0, 0);
   }
-}
-
-@keyframes march {
-  to {
-    stroke-dashoffset: -12;
+  100% {
+    opacity: 0;
   }
 }
 
@@ -178,15 +166,6 @@
   }
   75% {
     transform: translateX(3px);
-  }
-}
-
-@keyframes heroPieceFloat {
-  0%, 100% {
-    transform: rotate(7deg) translate(0, 0);
-  }
-  50% {
-    transform: rotate(5deg) translate(-6px, 8px);
   }
 }
 
