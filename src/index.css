@@ -98,6 +98,32 @@
     opacity: 1;
     transform: none;
   }
+
+  /* Hero load-sequence animations (Task 2). Per-node delays are applied
+     alongside these with Tailwind arbitrary [animation-delay:*] utilities.
+     transform-box/origin let pieceAssemble scale each SVG path about its own
+     centre. Every consuming node also carries `motion-safe-anim`. */
+  .anim-rise {
+    animation: riseIn 500ms var(--ease-out-soft) both;
+  }
+
+  .piece-anim {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pieceAssemble 500ms var(--ease-out-soft) both;
+  }
+
+  .anim-socket {
+    animation:
+      socketIn 500ms var(--ease-out-soft) 600ms both,
+      march 2.5s linear 1.1s infinite;
+  }
+
+  .anim-hero-piece {
+    animation:
+      pieceDrop 900ms var(--ease-out-soft) 700ms backwards,
+      heroPieceFloat 5s ease-in-out 1.6s infinite;
+  }
 }
 
 /* Entrance & loop keyframes — consumed by Tasks 2–3 (hero stagger, jigsaw
