@@ -1,4 +1,4 @@
-export const SITE_URL = 'https://nkktech.co.tz'
+export const SITE_URL = 'https://www.nkktech.co.tz'
 export const SITE_NAME = 'NKK Tech Company Limited'
 export const SITE_TITLE = 'NKK Tech — Software, Security Systems & Hardware Supply'
 export const SITE_DESCRIPTION =
