@@ -3,6 +3,7 @@
 import { useId, useState } from 'react'
 import type { ReactNode } from 'react'
 import { CONTACT } from '@/lib/site'
+import { sendQuoteRequest } from '@/app/actions/quote'
 import { SectionHeader } from './ui/SectionHeader'
 import { Reveal } from './ui/Reveal'
 import { Button } from './ui/Button'
@@ -10,6 +11,9 @@ import { CheckIcon, MailIcon, MapPinIcon, PhoneIcon } from './ui/icons'
 
 const ERROR_MESSAGE =
   'Please add your name, what you need, and an email or phone number.'
+
+const SEND_ERROR_MESSAGE =
+  'Something went wrong sending your request. Please try again, or email us directly.'
 
 const inputClasses =
   'w-full rounded-md border border-line-strong bg-white px-3 py-2.5 text-[15px] text-ink placeholder:text-muted transition hover:border-brand focus:border-brand focus:outline-none focus:shadow-[0_0_0_3px_rgba(0,136,204,.35)]'
@@ -37,28 +41,45 @@ function isValidEmail(email: string): boolean {
 
 export function QuoteSection() {
   const [sent, setSent] = useState(false)
-  const [error, setError] = useState(false)
+  const [sending, setSending] = useState(false)
+  const [error, setError] = useState<'validation' | 'send' | null>(null)
   const [errorCount, setErrorCount] = useState(0)
 
-  function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     const data = new FormData(event.currentTarget)
     const name = String(data.get('name') ?? '').trim()
+    const company = String(data.get('company') ?? '').trim()
     const email = String(data.get('email') ?? '').trim()
     const phone = String(data.get('phone') ?? '').trim()
     const message = String(data.get('message') ?? '').trim()
+    const website = String(data.get('website') ?? '').trim()
 
     const hasContact = email !== '' || phone !== ''
     const emailOk = email === '' || isValidEmail(email)
 
     if (!name || !message || !hasContact || !emailOk) {
-      setError(true)
+      setError('validation')
       setErrorCount((count) => count + 1)
       return
     }
 
-    setError(false)
-    setSent(true)
+    setError(null)
+    setSending(true)
+    try {
+      const result = await sendQuoteRequest({ name, company, email, phone, message, website })
+      if (result.ok) {
+        setSent(true)
+      } else {
+        setError('send')
+        setErrorCount((count) => count + 1)
+      }
+    } catch {
+      setError('send')
+      setErrorCount((count) => count + 1)
+    } finally {
+      setSending(false)
+    }
   }
 
   return (
@@ -103,8 +124,12 @@ export function QuoteSection() {
             <form
               noValidate
               onSubmit={handleSubmit}
-              className="flex flex-col gap-3.5 md:gap-4"
+              className="relative flex flex-col gap-3.5 md:gap-4"
             >
+              <div aria-hidden="true" className="absolute -left-[9999px] top-auto h-px w-px overflow-hidden">
+                <label htmlFor="quote-website">Website</label>
+                <input id="quote-website" name="website" type="text" tabIndex={-1} autoComplete="off" />
+              </div>
               <div className="flex flex-col gap-3.5 md:grid md:grid-cols-2 md:gap-4">
                 <Field label="Your name">
                   {(id) => (
@@ -171,11 +196,11 @@ export function QuoteSection() {
                   role="alert"
                   className="anim-shake motion-safe-anim text-[13px] text-[#D64545]"
                 >
-                  {ERROR_MESSAGE}
+                  {error === 'validation' ? ERROR_MESSAGE : SEND_ERROR_MESSAGE}
                 </p>
               )}
-              <Button type="submit" variant="primary" size="lg" fullWidth>
-                Send request
+              <Button type="submit" variant="primary" size="lg" fullWidth disabled={sending}>
+                {sending ? 'Sending…' : 'Send request'}
               </Button>
             </form>
           )}
