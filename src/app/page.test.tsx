@@ -22,5 +22,19 @@ describe('Page JSON-LD', () => {
       addressCountry: 'TZ',
     })
     expect(data.areaServed).toBe('Tanzania')
+
+    expect(data['@id']).toBe(`${SITE_URL}/#organization`)
+    expect(data.logo).toBe(`${SITE_URL}/icon_app.png`)
+    expect(data.image).toBe(`${SITE_URL}/og-image.png`)
+    expect(data.slogan).toBe('The Missing Piece in Your Digital Transformation')
+    expect(data.contactPoint).toMatchObject({
+      '@type': 'ContactPoint',
+      contactType: 'sales',
+    })
+    const offers = data.hasOfferCatalog.itemListElement
+    expect(offers).toHaveLength(4)
+    expect(offers[0].itemOffered.url).toBe(
+      `${SITE_URL}/services/software-development`,
+    )
   })
 })
