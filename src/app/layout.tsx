@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import type { ReactNode } from 'react'
 import localFont from 'next/font/local'
 import { Space_Grotesk } from 'next/font/google'
-import { SITE_TITLE, SITE_DESCRIPTION } from '@/lib/site'
+import { SITE_URL, SITE_TITLE, SITE_DESCRIPTION } from '@/lib/site'
 import './globals.css'
 
 const avenirNext = localFont({
@@ -23,9 +23,24 @@ const spaceGrotesk = Space_Grotesk({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: SITE_TITLE,
   description: SITE_DESCRIPTION,
-  icons: { icon: '/icon_app.png' },
+  alternates: { canonical: '/' },
+  openGraph: {
+    type: 'website',
+    url: '/',
+    siteName: 'NKK Tech',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+    locale: 'en_US',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: SITE_TITLE,
+    description: SITE_DESCRIPTION,
+  },
+  icons: { icon: '/icon_app.png', apple: '/icon_app.png' },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
