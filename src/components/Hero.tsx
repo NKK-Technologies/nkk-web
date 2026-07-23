@@ -65,7 +65,7 @@ export function Hero() {
               stroke="rgba(0,136,204,.16)"
               strokeWidth="1"
             />
-            {/* Slot-facing seams — flash on attach, then pulse as a heartbeat. */}
+            {/* Slot-facing seams — flash once as the mark locks in, then rest. */}
             <g
               className="hero-seam-flash motion-safe-anim"
               fill="none"
