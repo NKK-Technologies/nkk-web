@@ -29,3 +29,6 @@ dist-ssr
 
 # SDD scratch
 .superpowers/
+
+*.tsbuildinfo
+design_handoff_*/
