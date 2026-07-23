@@ -47,6 +47,10 @@
 
   --shadow-card: 0 1px 2px rgba(10, 25, 47, .06), 0 4px 12px rgba(10, 25, 47, .08);
 
+  --ease-standard: cubic-bezier(.2, .6, .2, 1);
+  --ease-out-soft: cubic-bezier(.22, .61, .36, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
+
   --animate-hero-float: heroPieceFloat 5s ease-in-out infinite;
 
   @keyframes heroPieceFloat {
@@ -61,8 +65,13 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
     scroll-padding-top: 72px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
@@ -73,5 +82,109 @@
     line-height: 1.55;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+}
+
+@layer components {
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 650ms var(--ease-out-soft),
+      transform 650ms var(--ease-out-soft);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Entrance & loop keyframes — consumed by Tasks 2–3 (hero stagger, jigsaw
+   pieces, marching-ants socket, success pop, form shake). Defined at top level
+   so they are always emitted regardless of Tailwind's animate-* tree-shaking. */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pieceAssemble {
+  from {
+    opacity: 0;
+    transform: scale(.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes socketIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pieceDrop {
+  from {
+    opacity: 0;
+    transform: rotate(12deg) translate(34px, -46px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(7deg) translate(0, 0);
+  }
+}
+
+@keyframes march {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shakeX {
+  0%,
+  100% {
+    transform: none;
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+/* Reduced-motion guard: reveals snap to their final state and every keyframe
+   animation (entrances + loops) is killed via the shared motion-safe-anim hook. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .motion-safe-anim {
+    animation: none !important;
   }
 }
