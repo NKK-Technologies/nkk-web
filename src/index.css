@@ -1,39 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
-@theme {
-  --color-brand-blue: #0088CC;
-  --color-brand-light: #E6F3FA;
-  --color-brand-dark: #0A192F;
-  --color-brand-glass: rgba(230, 243, 250, 0.05);
-  --color-brand-glass-border: rgba(230, 243, 250, 0.1);
-
-  --font-sans: "Avenir Next", "Space Grotesk", system-ui, sans-serif;
-
-  --animate-pulse-slow: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-  --animate-float: float 6s ease-in-out infinite;
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Avenir Next";
+  src: url("/fonts/AvenirNext-Heavy.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+  font-display: swap;
 }
 
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
+@theme {
+  --color-brand: #0088CC;
+  --color-brand-deep: #0077B3;
+  --color-ice: #E6F3FA;
+  --color-navy: #0A192F;
+  --color-sky-mist: #7CC1E8;
+  --color-ink: #22344D;
+  --color-muted: #5C7089;
+  --color-line: #D8E7F2;
+  --color-line-strong: #AFCFE4;
+  --color-dark-body: #B8C7DA;
+
+  --font-display: "Avenir Next", -apple-system, "Segoe UI", sans-serif;
+  --font-body: "Space Grotesk", "Avenir Next", sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(10, 25, 47, .06), 0 4px 12px rgba(10, 25, 47, .08);
+
+  --ease-standard: cubic-bezier(.2, .6, .2, 1);
+  --ease-out-soft: cubic-bezier(.22, .61, .36, 1);
+  --ease-spring: cubic-bezier(.34, 1.56, .64, 1);
 }
 
 @layer base {
+  html {
+    scroll-padding-top: 72px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
   body {
-    @apply bg-brand-dark text-white font-sans antialiased selection:bg-brand-blue selection:text-white;
+    background-color: #fff;
+    color: var(--color-ink);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
 
 @layer components {
-  .glass-panel {
-    @apply bg-brand-glass backdrop-blur-xl border border-brand-glass-border rounded-2xl shadow-2xl;
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition:
+      opacity 650ms var(--ease-out-soft),
+      transform 650ms var(--ease-out-soft);
   }
-  
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-brand-blue to-brand-light;
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Step-badge pop (Task 3): hidden until the card's reveal fires, then pops. */
+  .reveal:not(.is-visible) .badge-pop {
+    opacity: 0;
+  }
+
+  .reveal.is-visible .badge-pop {
+    animation: popIn 400ms var(--ease-spring) 200ms both;
+  }
+
+  /* Hero load-sequence animations (Task 2). Per-node delays are applied
+     alongside these with Tailwind arbitrary [animation-delay:*] utilities.
+     transform-box/origin let pieceAssemble scale each SVG path about its own
+     centre. Every consuming node also carries `motion-safe-anim`. */
+  .anim-rise {
+    animation: riseIn 500ms var(--ease-out-soft) both;
+  }
+
+  /* Success-check pop (Task 3). Plays on mount; carries motion-safe-anim. */
+  .anim-pop {
+    animation: popIn 400ms var(--ease-spring) both;
+  }
+
+  /* Form-error shake (Task 3): re-triggered by remount via key={errorCount};
+     carries motion-safe-anim. */
+  .anim-shake {
+    animation: shakeX 300ms var(--ease-standard) both;
+    animation-iteration-count: 2;
+  }
+
+  .piece-anim {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: pieceAssemble 500ms var(--ease-out-soft) both;
+  }
+
+  .anim-socket {
+    animation:
+      socketIn 500ms var(--ease-out-soft) 600ms both,
+      march 2.5s linear 1.1s infinite;
+  }
+
+  .anim-hero-piece {
+    animation:
+      pieceDrop 900ms var(--ease-out-soft) 850ms backwards,
+      heroPieceFloat 5s ease-in-out 1.75s infinite;
+  }
+}
+
+/* Entrance & loop keyframes — consumed by Tasks 2–3 (hero stagger, jigsaw
+   pieces, marching-ants socket, success pop, form shake). Defined at top level
+   so they are always emitted regardless of Tailwind's animate-* tree-shaking. */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes pieceAssemble {
+  from {
+    opacity: 0;
+    transform: scale(.92);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes socketIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pieceDrop {
+  from {
+    opacity: 0;
+    transform: rotate(12deg) translate(34px, -46px);
+  }
+  to {
+    opacity: 1;
+    transform: rotate(7deg) translate(0, 0);
+  }
+}
+
+@keyframes march {
+  to {
+    stroke-dashoffset: -12;
+  }
+}
+
+@keyframes popIn {
+  0% {
+    opacity: 0;
+    transform: scale(.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes shakeX {
+  0%,
+  100% {
+    transform: none;
+  }
+  25% {
+    transform: translateX(-3px);
+  }
+  75% {
+    transform: translateX(3px);
+  }
+}
+
+@keyframes heroPieceFloat {
+  0%, 100% {
+    transform: rotate(7deg) translate(0, 0);
+  }
+  50% {
+    transform: rotate(5deg) translate(-6px, 8px);
+  }
+}
+
+/* Reduced-motion guard: reveals snap to their final state and every keyframe
+   animation (entrances + loops) is killed via the shared motion-safe-anim hook. */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  .motion-safe-anim {
+    animation: none !important;
+  }
+
+  .badge-pop {
+    opacity: 1 !important;
+    animation: none !important;
   }
 }
