@@ -13,16 +13,18 @@ type Link = {
 }
 
 const services: Link[] = [
-  { label: 'Software projects', href: '#services' },
-  { label: 'Access control', href: '#services' },
-  { label: 'CCTV & surveillance', href: '#services' },
-  { label: 'Hardware supply & tendering', href: '#services' },
+  { label: 'Software projects', href: '/services/software-development' },
+  { label: 'Access control', href: '/services/access-control' },
+  { label: 'CCTV & surveillance', href: '/services/cctv-surveillance' },
+  { label: 'Hardware supply & tendering', href: '/services/hardware-supply' },
 ]
 
 const company: Link[] = [
-  { label: 'Why us', href: '#team' },
-  { label: 'How we work', href: '#process' },
-  { label: 'Request a quote', href: '#quote' },
+  { label: 'About us', href: '/about' },
+  { label: 'Why us', href: '/#team' },
+  { label: 'How we work', href: '/#process' },
+  { label: 'Request a quote', href: '/#quote' },
+  { label: 'Privacy policy', href: '/privacy' },
 ]
 
 export function Footer() {
@@ -45,8 +47,8 @@ export function Footer() {
           <div className="grid grid-cols-2 gap-7 md:contents">
             <div className="flex flex-col gap-2.5">
               <span className={headingClasses}>Services</span>
-              {services.map(({ label, href }, i) => (
-                <a key={i} href={href} className={linkClasses}>
+              {services.map(({ label, href }) => (
+                <a key={label} href={href} className={linkClasses}>
                   {label}
                 </a>
               ))}

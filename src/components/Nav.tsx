@@ -6,10 +6,10 @@ import { MenuIcon, CloseIcon } from './ui/icons'
 import logoMain from '../assets/logo_main.png'
 
 const links = [
-  { href: '#services', label: 'Services' },
-  { href: '#team', label: 'Why us' },
-  { href: '#process', label: 'How we work' },
-  { href: '#quote', label: 'Contact' },
+  { href: '/#services', label: 'Services' },
+  { href: '/#team', label: 'Why us' },
+  { href: '/#process', label: 'How we work' },
+  { href: '/#quote', label: 'Contact' },
 ]
 
 export function Nav() {
@@ -33,7 +33,7 @@ export function Nav() {
       }`}
     >
       <div className="max-w-[1140px] mx-auto flex items-center justify-between gap-3 md:gap-6 py-2.5 px-4 md:py-3.5 md:px-6">
-        <a href="#top" className="flex items-center">
+        <a href="/" className="flex items-center">
           <img src={logoMain.src} alt="NKK Tech" className="block h-8 md:h-[38px]" />
         </a>
 
@@ -48,7 +48,7 @@ export function Nav() {
               {link.label}
             </a>
           ))}
-          <Button href="#quote" variant="primary" size="md">
+          <Button href="/#quote" variant="primary" size="md">
             Request a quote
           </Button>
         </div>
@@ -89,7 +89,7 @@ export function Nav() {
             ))}
             <div className="px-5 pt-2.5 pb-3">
               <Button
-                href="#quote"
+                href="/#quote"
                 variant="primary"
                 size="lg"
                 fullWidth
