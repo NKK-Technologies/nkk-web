@@ -52,7 +52,6 @@ export const metadata: Metadata = {
     description: SITE_DESCRIPTION,
     images: ['/og-image.png'],
   },
-  icons: { icon: '/icon_app.png', apple: '/icon_app.png' },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {
